@@ -410,6 +410,7 @@ class JeuDeRajel extends Program{
         String coordonnees = "";
         boolean statut = true;
         int choix = -1;
+        String choixStr = "";
         String[] tabCoup = new String[]{null, null};
         int numSauvegarde = (int) ((random()*NB_PROBLEMES)+1);
         Partie partie = chargerSauvegarde(numSauvegarde);
@@ -417,11 +418,13 @@ class JeuDeRajel extends Program{
         while (statut){
             clear();
             afficherLogo();
-            println(bold("\n                                       1 - JOUER\n                                       2 - GUIDE\n                                      3 - QUITTER\n\n"));
-            while (!(choix<=3 && choix>=1)){ // Choix dans le menu
+            println(bold("\n                                     (1) JOUER\n                                     (2) GUIDE\n                                     (3) QUITTER\n\n"));
+            do { // Choix dans le menu
                     print(bold("Entrez votre choix (ex: 1) : "));
-                    choix = readInt();
-            }
+                    choixStr = readString();
+            } while (!(equals(choixStr, "1") || equals(choixStr, "2") || equals(choixStr, "3")));
+            choix = stringToInt(choixStr);
+            choixStr = "";
             if (choix==1){
                 clear();
                 while (partie.tour<partie.nbTours){ // Boucle tant que la partie n'est pas terminée
